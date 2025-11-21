@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+:root {
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+body .light {
+  color: black;
+  background-color: white;
+}
+
+body .dark {
+  color: white;
+  background-color: black;
+}
+
+.btn {
+ display: flex;
+
+}
