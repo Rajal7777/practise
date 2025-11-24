@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Notes from "./component/Notes";
+import Notes from "./component/Search";
+import Search from "./component/Search";
 
 const App = () => {
   const [show, setShow] = useState(true);
@@ -9,12 +10,44 @@ const App = () => {
 
   const [weatherData, setWeatherData] = useState([]);
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-
-
+  //search 
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+  
+  console.log(results)
+  //search
   useEffect(() => {
-    setIsLoading(true);
+    //if search is empty ,clear everything
+    if (search.trim() === "") {
+      setResults([]);
+      return;
+    }
+
+    setLoading(true);
+
+    //Debounce --> wait 500ms
+    const timer = setTimeout(() => {
+
+      //fetch data
+     fetch(`https://dummyjson.com/products/search?q=${search}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setResults(data.products); // save results to state
+          setLoading(false);
+        })
+        .catch(() => setLoading(false));
+
+    }, 500);
+
+    //clean up time out
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  //weather api
+  useEffect(() => {
+    setLoading(true);
     const url = 'http://api.weatherapi.com/v1/current.json?key=3bb9cd9b61d1450b914130226252111&q=japan&aqi=no';
     const fetchData = async () => {
       try {
@@ -28,7 +61,7 @@ const App = () => {
         setError(error);
         console.log(error);
       } finally {
-        setIsLoading(false);
+        setLoading(false);
       }
     };
     fetchData();
@@ -63,18 +96,18 @@ const App = () => {
       <button onClick={() => setShow(!show)}>{show ? "hide" : "show"}</button>
       <hr /><hr />
       <h1>Weather</h1>
-      {isLoading && <p>loading... <br /> Please wait</p>}
+      {loading && <p>loading... <br /> Please wait</p>}
       {error ? <p>{error.mesaage ?? String(error)}</p> : (
         <div className="weather-data">
           <p>{weatherData.current?.last_updated}</p>
           <p>{weatherData.location?.name}</p>
           <p>{weatherData.location?.tz_id}</p>
- </div>
- 
- 
-)}
-<hr />
-<Notes />
+        </div>
+
+
+      )}
+      <hr />
+      <Search search={search} setSearch={setSearch} results={results} loading={loading} />
 
     </div>
   );
