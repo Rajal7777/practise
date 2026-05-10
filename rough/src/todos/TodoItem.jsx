@@ -7,9 +7,9 @@ export default function TodoItem({
 }) {
   return (
     <div className="todo-list">
-      {todos.length === 0 ? (
-        <p>No todos yet.</p>
-      ) : (
+      {todos.length === 0 && <p>No todos yet.</p>}
+   
+       {todos.length > 0 && (
         todos.map((todo) => (
           <div
             key={todo.id}
