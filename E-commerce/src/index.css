@@ -3,9 +3,9 @@
 
 /* base styles  */
 @layer base {
-  body {
+  /* body {
      @apply bg-[#1a1a1a] text-white;
-  }
+  } */
 
   button {
     @apply cursor-pointer;
