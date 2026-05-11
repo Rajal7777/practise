@@ -1,0 +1,7 @@
+  //   const [isModalOpen, setIsModalOpen] = useState(false);
+// <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+//       <p>This text is from app.js</p>
+//     </Modal>
+//   <button onClick={() =>setIsModalOpen(true)}>
+//     click to open
+//   </button>

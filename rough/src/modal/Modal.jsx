@@ -1,10 +1,14 @@
+
+
+{/*  modal */}
+
+/*
 import { useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 export default function Modal({ isOpen, onClose, children }) {
   const dialog = useRef();
 
-console.log('isOpen', isOpen);
   useEffect(() => {
     const modal = dialog.current;
   
@@ -27,3 +31,21 @@ console.log('isOpen', isOpen);
     document.getElementById("modal"),
   );
 }
+
+*/
+
+import { useEffect } from "react";
+
+export default function Modal() {
+    
+    useEffect(() => {
+        console.log('modal.jsx');
+    }, [])
+
+    return(
+        <div>
+            <h1>modal.jsx</h1>
+        </div>
+    )
+}
+
