@@ -8,11 +8,27 @@ export default function Layout() {
 
   console.log(item);
 
-  function handleAddToCart(item) {
-  setItem((prevItem) => [...prevItem, item]);
+  // function handleAddToCart(item) {
+  // setItem((prevItem) => [...prevItem, item]);
+  // }
+
+  function handleAddToCart(productId) {
+    setItem((prevItem) => {
+      const existingItem = prevItem.find((item) => item.id === productId);
+
+      if (existingItem) {
+        return prevItem.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        );
+      } else {
+        return [...prevItem, { id: productId, quantity: 1 }];
+      }
+    });
   }
 
-  const count = item.length;
+  const count = item.reduce((total, item) => total + item.quantity, 0);
   return (
     <>
       <section>
@@ -52,7 +68,7 @@ export default function Layout() {
                 <p>${product.price.toFixed(2)}</p>
                 <div>
                   <button
-                    onClick={() => handleAddToCart(product)}
+                    onClick={() => handleAddToCart(product.id)}
                     className="bg-blue-500 text-white px-4 py-2 rounded"
                   >
                     Add to Cart
