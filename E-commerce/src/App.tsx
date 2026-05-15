@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProductPage from "./pages/ProductPage";
+import CartProvider from "./context/CartContext";
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
 
 const router = createBrowserRouter(routes);
 
-export default function App(){
-  return <RouterProvider router={router} />
+export default function App() {
+  return (
+    <CartProvider>
+      <RouterProvider router={router} />
+    </CartProvider>
+  );
 }

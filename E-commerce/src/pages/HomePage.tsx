@@ -38,76 +38,52 @@ export default function HomePage() {
     });
   }
   return (
-    <>
-      <header className=" p-6 sticky top-0 z-50 backdrop-blur-md">
-        <nav>
-          <ul className="flex justify-between items-center">
-            <li>
-              <Link to="/" className="text-2xl text-[#808080] ">
-                Home
-              </Link>
-            </li>
 
-            <li>
-              <Link to="/cart" className="flex gap-x-2">
-                <ShoppingCart className=" text-[#808080] " />
+    <section className="flex flex-col gap-8 p-12">
+      <h2 className="text-3xl font-bold">Gaming products</h2>
 
-                {productCount > 0 && (
-                  <span className="w-6 h-6 flex items-center justify-center rounded-full bg-[#808080]/50 text-black">
-                    {productCount}
-                  </span>
-                )}
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <ul className="grid gap-12  sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {products.map((product) => (
+          <li
+            key={product.id}
+            className="flex flex-col gap-y-6 gap-8 border border-gray-200 p-2"
+          >
+            <Link to={`/${product.url}`}>
+              <img
+                src={product.image}
+                alt={product.name}
+                className="h-full w-full object-cover"
+              />
+            </Link>
 
-      <section className="flex flex-col gap-8 p-12">
-        <h2 className="text-3xl font-bold">Gaming products</h2>
-
-        <ul className="grid gap-12  sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {products.map((product) => (
-            <li
-              key={product.id}
-              className="flex flex-col gap-y-6 gap-8 border border-gray-200 p-2"
-            >
-              <Link to={`/${product.url}`}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-full w-full object-cover"
-                />
-              </Link>
-
-              <div className="space-y-2">
-                <h3 className="text-xl">{product.name}</h3>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, index) => (
-                    <Star
-                      key={index}
-                      size={18}
-                      fill={index < product.rating ? "gold" : "none"}
-                      color="gold"
-                    />
-                  ))}
-                </div>
-                <p className="font-bold">{product.price}</p>
+            <div className="space-y-2">
+              <h3 className="text-xl">{product.name}</h3>
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, index) => (
+                  <Star
+                    key={index}
+                    size={18}
+                    fill={index < product.rating ? "gold" : "none"}
+                    color="gold"
+                  />
+                ))}
               </div>
+              <p className="font-bold">{product.price}</p>
+            </div>
 
-              <div className="bg-stone-400 text-stone-100 flex items-center justify-center gap-x-4 rounded-sm">
-                <button
-                  onClick={() => handleAddToCart(product.id)}
-                  className="text-lg p-2 flex items-center gap-x-2 mb-0 pb-0"
-                >
-                  <ShoppingCart className="size-4" />
-                  Add to Cart
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-    </>
+            <div className="bg-stone-400 text-stone-100 flex items-center justify-center gap-x-4 rounded-sm">
+              <button
+                onClick={() => handleAddToCart(product.id)}
+                className="text-lg p-2 flex items-center gap-x-2 mb-0 pb-0"
+              >
+                <ShoppingCart className="size-4" />
+                Add to Cart
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
   );
 }

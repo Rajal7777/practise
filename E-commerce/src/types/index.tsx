@@ -35,7 +35,7 @@ export interface CartContextType {
     addToCart: (productId: number) => void;
     removeFromCart: (productId: number) => void;
     deleteFromCart: (productId: number) => void;
-    getProductQuality: (productID: number) => number;
+    getProductQuantity: (productID: number) => number;
     cartTotal: number;
     cartProducts: CartProduct[];
 }
