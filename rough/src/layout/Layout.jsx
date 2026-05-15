@@ -14,13 +14,11 @@ export default function Layout() {
 
   function handleAddToCart(productId) {
     setItem((prevItem) => {
-      const existingItem = prevItem.find((item) => item.id === productId);
+      const existingItem = prevItem.find((i) => i.id === productId);
 
       if (existingItem) {
-        return prevItem.map((item) =>
-          item.id === productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
+        return prevItem.map((i) =>
+          i.id === productId ? { ...i, quantity: i.quantity + 1 } : i,
         );
       } else {
         return [...prevItem, { id: productId, quantity: 1 }];

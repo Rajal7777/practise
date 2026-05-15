@@ -22,3 +22,22 @@ export default function ProductPage(){
       
     );  
 }
+
+/*
+//  function handleAddToCart(productId) {
+    setItem((prevItem) => {
+      const existingItem = prevItem.find((item) => item.id === productId);
+
+      if (existingItem) {
+        return prevItem.map((item) =>
+          item.id === productId
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        );
+      } else {
+        return [...prevItem, { id: productId, quantity: 1 }];
+      }
+    });
+  }
+
+  */

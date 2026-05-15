@@ -63,13 +63,14 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <section className="my-0 mx-32 flex flex-col gap-8">
+      <section className="flex flex-col gap-8 p-12">
         <h2 className="text-3xl font-bold">Gaming products</h2>
-        <ul className="grid sm:grid-cols-2 gap-12 md:grid-cols-3 xl:grid-cols-4">
+
+        <ul className="grid gap-12  sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {products.map((product) => (
             <li
               key={product.id}
-              className="flex flex-col gap-8 border border-gray-200 p-2"
+              className="flex flex-col gap-y-6 gap-8 border border-gray-200 p-2"
             >
               <Link to={`/${product.url}`}>
                 <img
@@ -81,7 +82,7 @@ export default function HomePage() {
 
               <div className="space-y-2">
                 <h3 className="text-xl">{product.name}</h3>
-                <div className="flex gap-1">
+                <div className="flex items-center gap-1">
                   {[...Array(5)].map((_, index) => (
                     <Star
                       key={index}

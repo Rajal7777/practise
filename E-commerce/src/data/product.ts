@@ -19,7 +19,7 @@ export const products = [
       {
         id: 2,
         user: "Sarah Chen",
-        rating: 5,
+        rating: 3,
         comment:
           "Very comfortable for long gaming sessions. Great build quality.",
         date: "2024-02-14",
@@ -27,7 +27,7 @@ export const products = [
       {
         id: 3,
         user: "Mike Rodriguez",
-        rating: 5,
+        rating: 4,
         comment: "Perfect",
         date: "2024-01-12",
       },
