@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import { products } from "../data/product";
 import { useCart } from "../context/CartContext";
 
-
 //[...Array(5)] --> [undefined, undefined, undefined, undefined, undefined] {makes a shallow copy spread syntax}
 
 export default function HomePage() {
- const {addToCart: handleAddToCart,} = useCart();
+  const { addToCart: handleAddToCart } = useCart();
   return (
-
     <section className="flex flex-col gap-8 p-12">
       <h2 className="text-3xl font-bold">Gaming products</h2>
 
@@ -55,6 +53,5 @@ export default function HomePage() {
         ))}
       </ul>
     </section>
-
   );
 }

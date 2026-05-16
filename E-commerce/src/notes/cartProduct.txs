@@ -46,3 +46,10 @@ return {
   ...product,
   quantity: cartItem!.quantity,   {'!' -> this ! sign says to ts that it is not empty trust me}
 };
+
+
+Alternate
+   cartProducts: cart.map((cartItem) => {
+                    const prod = products.find((p) => p.id === cartItem.productId)!;
+                    return { ...prod, quantity: cartItem.quantity };
+                }),
