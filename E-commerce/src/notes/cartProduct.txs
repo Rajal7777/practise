@@ -1,0 +1,48 @@
+const cartProducts = products
+  .filter((product) => {
+    const cartItem = cart.find(
+      (item) => item.productId === product.id
+    );
+
+    return cartItem;
+  })
+  .map((product) => {
+    const cartItem = cart.find(
+      (item) => item.productId === product.id
+    );
+
+    return {
+      ...product,
+      quantity: cartItem.quantity,
+    };
+  });
+
+
+1)Step 1
+//go through every product
+  .filter((product) => {})
+
+1)Step 2
+//check if product exists in cart
+const cartItem = cart.find((item) => item.productId === product.id)
+
+1)Step 3
+//if exists -> keep it 
+//if not -> remove it
+return cartItem;
+
+1)Step 4
+//edit{change} the data keep all the items and add the quantity property
+map()
+return {
+  ...product,
+  quantity: cartItem.quantity,
+};
+//“Copy all product info and add quantity.”
+
+
+1)Step 5
+return {
+  ...product,
+  quantity: cartItem!.quantity,   {'!' -> this ! sign says to ts that it is not empty trust me}
+};

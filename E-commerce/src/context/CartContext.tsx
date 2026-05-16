@@ -1,4 +1,4 @@
-import  { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { products } from "../data/product";
 import type { CartContextType, CartItem } from "../types";
 
@@ -8,12 +8,38 @@ import type { CartContextType, CartItem } from "../types";
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 
-//consume coontext
+//consume context
 export default function CartProvider({ children }: { children: React.ReactNode; }) {
     const [cart, setCart] = useState<CartItem[]>([]);
+    const [cartTotal, setCartTotal] = useState<number>(0);
 
 
-    // //add item to cart
+
+    const cartProducts = products.filter((product) => {
+        const cartItem = cart.find(
+            (item) => item.productId === product.id
+        );
+        console.log(cartItem);
+        return cartItem;
+    }).map((product) => {
+        const cartItem = cart.find(
+            (item) => item.productId === product.id
+        );
+
+        return {
+            ...product,
+            quantity: cartItem!.quantity,
+        };
+    });
+
+    useEffect(() => {
+        const total = cartProducts.reduce((sum, item) => {
+            return sum + item.price * item.quantity;
+        }, 0);
+        setCartTotal(total);
+    }, [cartProducts]);
+
+    //add item to cart
     function addToCart(productId: number) {
         setCart((prevCartItems: CartItem[]) => {
             const existingCartItem = prevCartItems.find(
@@ -46,6 +72,7 @@ export default function CartProvider({ children }: { children: React.ReactNode; 
         });
     }
 
+    //delete item
     function deleteFromCart(productId: number) {
         setCart((prevCart: CartItem[]) => prevCart.filter((item) => item.productId !== productId));
     }

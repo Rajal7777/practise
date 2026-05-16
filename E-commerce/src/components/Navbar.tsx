@@ -4,15 +4,15 @@ import { useCart } from "../context/CartContext";
 
 
 export default function Navbar() {
-    const { cart } = useCart();
+    const { cart: items } = useCart();
 
-    const productCount = cart.reduce(
+    const productCount = items.reduce(
         (total, item) => total + item.quantity,
         0,
     );
 
     return (
-        <header className=" p-6 sticky top-0 z-50 backdrop-blur-md">
+        <header className=" p-6 sticky top-0 z-50 backdrop-blur-md border-b border-gray-400 mb-px">
             <nav>
                 <ul className="flex justify-between items-center">
                     <li>

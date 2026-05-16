@@ -1,42 +1,13 @@
 import { ShoppingCart, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { products } from "../data/product";
-import { useState } from "react";
+import { useCart } from "../context/CartContext";
+
 
 //[...Array(5)] --> [undefined, undefined, undefined, undefined, undefined] {makes a shallow copy spread syntax}
-interface CartItem {
-  productId: number;
-  quantity: number;
-}
 
 export default function HomePage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  const productCount = cartItems.reduce(
-    (total, item) => total + item.quantity,
-    0,
-  );
-
-  //add item to cart
-  function handleAddToCart(productId: number) {
-    console.log("btn clicked", productId);
-    setCartItems((prevCartItems: CartItem[]) => {
-      const existingCartItem = prevCartItems.find(
-        (item: CartItem) => item.productId === productId,
-      );
-      if (existingCartItem) {
-        // If the item already exists in the cart, increase the quantity
-        return prevCartItems.map((item: CartItem) =>
-          item.productId === productId
-            ? { ...item, quantity: item.quantity + 1 }
-            : item,
-        );
-      } else {
-        // If the item is not in the cart, add it with a quantity of 1
-        return [...prevCartItems, { productId, quantity: 1 }];
-      }
-    });
-  }
+ const {addToCart: handleAddToCart,} = useCart();
   return (
 
     <section className="flex flex-col gap-8 p-12">
